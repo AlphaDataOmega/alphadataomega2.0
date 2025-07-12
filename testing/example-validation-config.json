@@ -1,0 +1,55 @@
+{
+  "feature": "Example Feature Implementation",
+  "outputDir": "testing/screenshots",
+  "defaultViewport": {
+    "width": 1920,
+    "height": 1080
+  },
+  "defaultTimeout": 30000,
+  "stopOnFailure": false,
+  "tests": [
+    {
+      "name": "homepage-load",
+      "url": "http://localhost:3000",
+      "waitFor": "body",
+      "validation": {
+        "allowJSErrors": false,
+        "allowNetworkErrors": false,
+        "allowHTTPErrors": false,
+        "maxLoadTime": 5000,
+        "customRules": [
+          {
+            "type": "console_contains",
+            "value": "Application loaded successfully",
+            "shouldExist": true,
+            "name": "App initialization message"
+          },
+          {
+            "type": "no_errors_containing",
+            "value": "TypeError",
+            "name": "No type errors"
+          }
+        ]
+      }
+    },
+    {
+      "name": "feature-interaction",
+      "url": "http://localhost:3000",
+      "waitFor": ".main-content",
+      "interactions": [
+        {
+          "type": "click",
+          "selector": "#feature-button"
+        },
+        {
+          "type": "waitForSelector",
+          "selector": ".feature-result"
+        }
+      ],
+      "validation": {
+        "allowJSErrors": false,
+        "maxLoadTime": 3000
+      }
+    }
+  ]
+}
